@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compress and resize your images online for free. Reduce file size without losing quality.">
+    <meta name="keywords" content="image compressor, resize images online, reduce image size, image optimization tool">
+    <title>Image Compression & Resizing Tool | ImageOptimizer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>ImageOptimizer</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tool.html" class="active">Resize Tool</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="tool-section">
+            <div class="container">
+                <h1>Image Compression & Resizing Tool</h1>
+                <p class="tool-description">Upload an image, adjust the settings, and download the optimized version.</p>
+                
+                <div class="tool-container">
+                    <div class="upload-container">
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop your image here</p>
+                            <p>or</p>
+                            <label for="imageInput" class="btn btn-primary">Select File</label>
+                            <input type="file" id="imageInput" accept="image/jpeg, image/png" hidden>
+                            <p class="file-types">Supported formats: JPG, PNG</p>
+                        </div>
+                    </div>
+
+                    <div class="editor-container" id="editorContainer" style="display: none;">
+                        <div class="image-preview-container">
+                            <div class="preview-box">
+                                <h3>Original</h3>
+                                <div class="image-preview" id="originalPreview">
+                                    <!-- Original image will be displayed here -->
+                                </div>
+                                <div class="image-info" id="originalInfo">
+                                    <!-- Original image info will be displayed here -->
+                                </div>
+                            </div>
+                            <div class="preview-box">
+                                <h3>Optimized</h3>
+                                <div class="image-preview" id="optimizedPreview">
+                                    <!-- Optimized image will be displayed here -->
+                                </div>
+                                <div class="image-info" id="optimizedInfo">
+                                    <!-- Optimized image info will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="controls-container">
+                            <div class="control-group">
+                                <h3>Resize Options</h3>
+                                <div class="control-item">
+                                    <label for="widthInput">Width (px):</label>
+                                    <input type="number" id="widthInput" min="1" placeholder="Auto">
+                                </div>
+                                <div class="control-item">
+                                    <label for="heightInput">Height (px):</label>
+                                    <input type="number" id="heightInput" min="1" placeholder="Auto">
+                                </div>
+                                <div class="control-item checkbox">
+                                    <input type="checkbox" id="maintainAspectRatio" checked>
+                                    <label for="maintainAspectRatio">Maintain aspect ratio</label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <h3>Quality Options</h3>
+                                <div class="control-item">
+                                    <label for="qualitySlider">Compression Quality: <span id="qualityValue">80%</span></label>
+                                    <input type="range" id="qualitySlider" min="1" max="100" value="80">
+                                </div>
+                                <div class="control-item">
+                                    <label for="formatSelect">Output Format:</label>
+                                    <select id="formatSelect">
+                                        <option value="jpeg">JPEG</option>
+                                        <option value="png">PNG</option>
+                                        <option value="webp">WebP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <h3>Background Options</h3>
+                                <div class="control-item checkbox">
+                                    <input type="checkbox" id="removeBackground">
+                                    <label for="removeBackground">Remove Background</label>
+                                </div>
+                                <div class="control-item" id="backgroundColorContainer" style="display: none;">
+                                    <label for="backgroundColorPicker">New Background Color:</label>
+                                    <input type="color" id="backgroundColorPicker" value="#ffffff">
+                                </div>
+                                <div class="control-item" id="backgroundImageContainer" style="display: none;">
+                                    <label for="backgroundImageInput">Upload Background Image:</label>
+                                    <input type="file" id="backgroundImageInput" accept="image/*">
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <h3>Image Adjustments</h3>
+                                <div class="control-item">
+                                    <label for="brightnessSlider">Brightness: <span id="brightnessValue">0</span></label>
+                                    <input type="range" id="brightnessSlider" min="-100" max="100" value="0">
+                                </div>
+                                <div class="control-item">
+                                    <label for="contrastSlider">Contrast: <span id="contrastValue">0</span></label>
+                                    <input type="range" id="contrastSlider" min="-100" max="100" value="0">
+                                </div>
+                                <div class="control-item">
+                                    <label for="sharpnessSlider">Sharpness: <span id="sharpnessValue">0</span></label>
+                                    <input type="range" id="sharpnessSlider" min="0" max="100" value="0">
+                                </div>
+                            </div>
+
+                            <div class="button-group">
+                                <button id="downloadBtn" class="btn btn-primary">Download Image</button>
+                                <button id="resetBtn" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad placeholder -->
+        <div class="ad-container">
+            <div class="ad-placeholder">
+                <p>Advertisement Space</p>
+            </div>
+        </div>
+
+        <section class="tips-section">
+            <div class="container">
+                <h2>Image Optimization Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3><i class="fas fa-lightbulb"></i> For Web Images</h3>
+                        <p>Use JPEG format with 70-80% quality for photos. For web, resize images to the exact dimensions they'll be displayed.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3><i class="fas fa-lightbulb"></i> For Print</h3>
+                        <p>Maintain higher resolution (300 DPI) and quality (90%+) when preparing images for print.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3><i class="fas fa-lightbulb"></i> For Social Media</h3>
+                        <p>Each platform has ideal dimensions. Instagram: 1080×1080px (square), Twitter: 1200×675px (landscape).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>ImageOptimizer</h2>
+                    <p>Free online image compression and resizing tool</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tool.html">Resize Tool</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="about.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ImageOptimizer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/image-processor.js"></script>
+</body>
+</html>
